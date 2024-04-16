@@ -1,15 +1,12 @@
 import PizzaBlock from "./PizzaBlock";
 
-function PizzaBlockList() {
+function PizzaBlockList({ pizzas }) {
   return (
-    <div className="content__items">
-      <PizzaBlock />
-      <PizzaBlock />
-      <PizzaBlock />
-      <PizzaBlock />
-      <PizzaBlock />
-      <PizzaBlock />
-    </div>
+    <ul className="content__items">
+      {pizzas.map((item) => (
+        <PizzaBlock key={item.id} {...item} />
+      ))}
+    </ul>
   );
 }
 

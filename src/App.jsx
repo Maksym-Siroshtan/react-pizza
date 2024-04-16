@@ -5,6 +5,8 @@ import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlockList from "./components/PizzaBlockList";
 
+import pizzas from "./pizzas.json";
+
 function App() {
   return (
     <div className="wrapper">
@@ -16,7 +18,7 @@ function App() {
             <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
-          <PizzaBlockList />
+          <PizzaBlockList pizzas={pizzas} />
         </div>
       </div>
     </div>
