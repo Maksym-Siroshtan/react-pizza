@@ -1,9 +1,9 @@
 import PizzaBlock from "./PizzaBlock";
 
-function PizzaBlockList({ pizzas }) {
+function PizzaBlockList({ items }) {
   return (
     <ul className="content__items">
-      {pizzas.map((item) => (
+      {items.map((item) => (
         <PizzaBlock key={item.id} {...item} />
       ))}
     </ul>
