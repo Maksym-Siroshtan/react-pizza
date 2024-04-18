@@ -29,7 +29,7 @@ function PizzaBlock({ imageUrl, title, types, sizes, price }) {
               onClick={() => setActivePizzaSizeIndex(idx)}
               className={activePizzaSizeIndex === idx ? "active" : ""}
             >
-              {size}
+              {size} см.
             </li>
           ))}
         </ul>
