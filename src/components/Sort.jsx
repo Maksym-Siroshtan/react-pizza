@@ -1,7 +1,7 @@
 import React from "react";
 
 function Sort() {
-  const valuesToSort = ["популярності", "ціні", "алфавіту"];
+  const valuesToSort = ["популярністю", "ціною", "абеткою"];
 
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
   const [sortValueIndex, setSortValueIndex] = React.useState(0);
@@ -27,7 +27,7 @@ function Sort() {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортування за:</b>
         <span onClick={() => setIsOpenPopup(!isOpenPopup)}>
           {selectedValue}
         </span>

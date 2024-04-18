@@ -4,12 +4,12 @@ function Categories() {
   const [activeCategoryIndex, setActiveCategoryIndex] = React.useState(0);
 
   const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
+    "Всі",
+    "М'ясні",
+    "Вегетаріанські",
     "Гриль",
-    "Острые",
-    "Закрытые",
+    "Гострі",
+    "Закриті",
   ];
 
   return (
