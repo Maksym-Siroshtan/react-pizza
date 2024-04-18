@@ -33,7 +33,7 @@
     "id": 3,
     "imageUrl": "https://st3.depositphotos.com/6764830/15625/i/450/depositphotos_156256738-stock-photo-pizza-pepperoni-this-picture-is.jpg",
     "title": "Піца з грибами, беконом та сиром",
-    "types": [1],
+    "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 275,
     "category": 2,
