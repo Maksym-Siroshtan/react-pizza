@@ -1,45 +1,23 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/Header";
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import PizzaBlockList from "./components/PizzaBlock/PizzaBlockList";
+
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/NotFound";
 
 import "./scss/app.scss";
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axios.get(
-          "https://0dbb8dbaba68354c.mokky.dev/items"
-        );
-
-        setItems(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
-
   return (
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Всі піци</h2>
-          <PizzaBlockList items={items} isLoading={isLoading} />
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );
