@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import "./scss/app.scss";
-
 import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
-import PizzaBlockList from "./components/PizzaBlockList";
+import PizzaBlockList from "./components/PizzaBlock/PizzaBlockList";
+
+import "./scss/app.scss";
 
 function App() {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -21,6 +22,8 @@ function App() {
         setItems(data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, []);
@@ -35,7 +38,7 @@ function App() {
             <Sort />
           </div>
           <h2 className="content__title">Всі піци</h2>
-          <PizzaBlockList items={items} />
+          <PizzaBlockList items={items} isLoading={isLoading} />
         </div>
       </div>
     </div>
