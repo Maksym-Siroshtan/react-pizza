@@ -1,7 +1,7 @@
 import React from "react";
 
-function Sort() {
-  const valuesToSort = ["популярністю", "ціною", "абеткою"];
+function Sort({ onChangeToSort }) {
+  const valuesToSort = ["популярністю", "ціною", "назвою"];
 
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
   const [sortValueIndex, setSortValueIndex] = React.useState(0);
@@ -10,6 +10,7 @@ function Sort() {
   const onClickToSort = (idx) => {
     setSortValueIndex(idx);
     setIsOpenPopup(false);
+    onChangeToSort(idx);
   };
 
   return (
