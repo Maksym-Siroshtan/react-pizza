@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .categories {
   ul {
@@ -26,6 +26,14 @@
         background-color: #282828;
         color: #fff;
       }
+    }
+
+    @media (max-width: 1220px) {
+      flex-wrap: wrap;
+      padding-bottom: 30px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
     }
   }
 }
