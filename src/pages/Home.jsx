@@ -13,12 +13,14 @@ function Home() {
   const [sortBy, setSortBy] = useState("rating");
   const [search, setSearch] = useState("");
 
-  const onChangeToSort = (value) => {
-    switch (value) {
-      case 1:
+  const valuesToSort = ["популярністю", "ціною", "назвою"];
+
+  const onChangeTheSortValue = (idx) => {
+    switch (valuesToSort[idx]) {
+      case "ціною":
         setSortBy("price");
         break;
-      case 2:
+      case "назвою":
         setSortBy("title");
         break;
       default:
@@ -67,7 +69,10 @@ function Home() {
     <div className="container">
       <div className="content__top">
         <Categories />
-        <Sort onChangeToSort={onChangeToSort} />
+        <Sort
+          valuesToSort={valuesToSort}
+          onChangeTheSortValue={onChangeTheSortValue}
+        />
       </div>
       <div className="content__title-search-wrapper">
         <h2 className="content__title">
