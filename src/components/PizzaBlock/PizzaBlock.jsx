@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 
-function PizzaBlock({ imageUrl, title, types, sizes, price }) {
+function PizzaBlock({ imageUrl, title, types, sizes, price, rating }) {
   const [activePizzaTypeIndex, setActivePizzaTypeIndex] = React.useState(0);
   const [activePizzaSizeIndex, setActivePizzaSizeIndex] = React.useState(0);
 
@@ -9,6 +9,7 @@ function PizzaBlock({ imageUrl, title, types, sizes, price }) {
   return (
     <li className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <span>{[...new Array(rating)].map((_) => "⭐")}</span>
       <div className="pizza-block__description">
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
