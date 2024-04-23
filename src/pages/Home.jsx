@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Categories from "../components/Categories";
+import Search from "../components/Search";
 import Sort from "../components/Sort";
+
 import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortBy, setSortBy] = useState("rating");
+  const [search, setSearch] = useState("");
 
   const onChangeToSort = (value) => {
     switch (value) {
@@ -33,6 +36,10 @@ function Home() {
         params.order = "desc";
       }
 
+      if (search) {
+        params.search = search;
+      }
+
       const { data } = await axios.get(
         `https://662520ff04457d4aaf9df0a0.mockapi.io/items`,
         {
@@ -42,7 +49,7 @@ function Home() {
 
       setItems(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +61,7 @@ function Home() {
 
   useEffect(() => {
     fetchItems();
-  }, [sortBy]);
+  }, [sortBy, search]);
 
   return (
     <div className="container">
@@ -62,7 +69,13 @@ function Home() {
         <Categories />
         <Sort onChangeToSort={onChangeToSort} />
       </div>
-      <h2 className="content__title">Всі піци</h2>
+      <div className="content__title-search-wrapper">
+        <h2 className="content__title">
+          {search ? `Пошук за запитом: ${search}` : "Всі піци"}
+        </h2>
+        <Search search={search} setSearch={setSearch} />
+      </div>
+      <p></p>
       <PizzaBlockList items={items} isLoading={isLoading} />
     </div>
   );

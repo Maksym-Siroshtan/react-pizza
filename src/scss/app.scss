@@ -24,10 +24,55 @@ body {
 .content {
   padding: 40px 0;
 
+  &__title-search-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 35px 0;
+
+    @media (max-width: 430px) {
+      flex-direction: column-reverse;
+      gap: 30px;
+    }
+  }
+
   &__title {
     font-size: 38px;
     font-weight: bold;
-    margin: 35px 0;
+  }
+
+  &__search {
+    position: relative;
+
+    input {
+      padding: 10px 50px;
+      display: flex;
+      align-items: center;
+      border: 1px solid $gray-line;
+      border-radius: 10px;
+
+      &:focus {
+        border: 1px solid $black;
+      }
+    }
+
+    .search {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+
+    .close {
+      width: 25px;
+      position: absolute;
+      top: 7px;
+      right: 12px;
+      cursor: pointer;
+
+      &:active {
+        transform: scale(1.1);
+      }
+    }
   }
 
   &__items {
