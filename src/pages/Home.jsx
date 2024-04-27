@@ -10,33 +10,22 @@ import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("rating");
+  const [sortType, setSortType] = useState({
+    name: "популярністю (DESC)",
+    sortProperty: "rating",
+  });
   const [search, setSearch] = useState("");
-
-  const valuesToSort = ["популярністю", "ціною", "назвою"];
-
-  const onChangeTheSortValue = (idx) => {
-    switch (valuesToSort[idx]) {
-      case "ціною":
-        setSortBy("price");
-        break;
-      case "назвою":
-        setSortBy("title");
-        break;
-      default:
-        setSortBy("rating");
-    }
-  };
 
   const fetchItems = async () => {
     try {
+      setIsLoading(true);
+      const sortBy = sortType.sortProperty.replace("-", "");
+      const order = sortType.sortProperty.includes("-") ? "ask" : "desc";
+
       const params = {
         sortBy,
+        order,
       };
-
-      if (sortBy === "rating") {
-        params.order = "desc";
-      }
 
       if (search) {
         params.search = search;
@@ -59,20 +48,13 @@ function Home() {
 
   useEffect(() => {
     fetchItems();
-  }, []);
-
-  useEffect(() => {
-    fetchItems();
-  }, [sortBy, search]);
+  }, [sortType, search]);
 
   return (
     <div className="container">
       <div className="content__top">
         <Categories />
-        <Sort
-          valuesToSort={valuesToSort}
-          onChangeTheSortValue={onChangeTheSortValue}
-        />
+        <Sort value={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <div className="content__title-search-wrapper">
         <h2 className="content__title">
