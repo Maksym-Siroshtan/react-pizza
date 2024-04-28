@@ -10,6 +10,7 @@ import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
     name: "популярністю (DESC)",
     sortProperty: "rating",
@@ -21,11 +22,16 @@ function Home() {
       setIsLoading(true);
       const sortBy = sortType.sortProperty.replace("-", "");
       const order = sortType.sortProperty.includes("-") ? "ask" : "desc";
+      const category = categoryId > 0 ? `${categoryId}` : "";
 
       const params = {
         sortBy,
         order,
       };
+
+      if (category) {
+        params.category = category;
+      }
 
       if (search) {
         params.search = search;
@@ -48,12 +54,15 @@ function Home() {
 
   useEffect(() => {
     fetchItems();
-  }, [sortType, search]);
+  }, [categoryId, sortType, search]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
+        <Categories
+          value={categoryId}
+          onChangeCategory={(id) => setCategoryId(id)}
+        />
         <Sort value={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <div className="content__title-search-wrapper">
