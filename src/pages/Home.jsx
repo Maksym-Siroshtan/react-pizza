@@ -7,9 +7,12 @@ import Sort from "../components/Sort";
 
 import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 
+import Pagination from "../components/Pagination/Pagination";
+
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
     name: "популярністю (DESC)",
@@ -25,6 +28,8 @@ function Home() {
       const category = categoryId > 0 ? `${categoryId}` : "";
 
       const params = {
+        page: currentPage,
+        limit: 4,
         sortBy,
         order,
       };
@@ -54,7 +59,7 @@ function Home() {
 
   useEffect(() => {
     fetchItems();
-  }, [categoryId, sortType, search]);
+  }, [categoryId, sortType, search, currentPage]);
 
   return (
     <div className="container">
@@ -71,8 +76,9 @@ function Home() {
         </h2>
         <Search search={search} setSearch={setSearch} />
       </div>
-      <p></p>
       <PizzaBlockList items={items} isLoading={isLoading} />
+
+      <Pagination onPageChange={(number) => setCurrentPage(number)} />
     </div>
   );
 }
