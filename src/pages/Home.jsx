@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import axios from "axios";
 
 import Categories from "../components/Categories";
@@ -10,10 +12,11 @@ import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
 
 function Home() {
+  const categoryId = useSelector((state) => state.filters.categoryId);
+
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
     name: "популярністю (DESC)",
     sortProperty: "rating",
@@ -64,10 +67,7 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onChangeCategory={(id) => setCategoryId(id)}
-        />
+        <Categories />
         <Sort value={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <div className="content__title-search-wrapper">
