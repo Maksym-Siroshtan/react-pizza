@@ -1,6 +1,12 @@
 import React from "react";
 
-function Sort({ value, onChangeSort }) {
+import { useSelector, useDispatch } from "react-redux";
+import { setSortType } from "../redux/slices/filtersSlice";
+
+function Sort() {
+  const value = useSelector((state) => state.filters.sortType);
+  const dispatch = useDispatch();
+
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
   const list = [
@@ -13,7 +19,7 @@ function Sort({ value, onChangeSort }) {
   ];
 
   const onClickToSort = (obj) => {
-    onChangeSort(obj);
+    dispatch(setSortType(obj));
     setIsOpenPopup(false);
   };
 

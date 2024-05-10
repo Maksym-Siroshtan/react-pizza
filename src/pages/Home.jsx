@@ -13,14 +13,11 @@ import Pagination from "../components/Pagination/Pagination";
 
 function Home() {
   const categoryId = useSelector((state) => state.filters.categoryId);
+  const sortType = useSelector((state) => state.filters.sortType);
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortType, setSortType] = useState({
-    name: "популярністю (DESC)",
-    sortProperty: "rating",
-  });
   const [search, setSearch] = useState("");
 
   const fetchItems = async () => {
@@ -68,7 +65,7 @@ function Home() {
     <div className="container">
       <div className="content__top">
         <Categories />
-        <Sort value={sortType} onChangeSort={(obj) => setSortType(obj)} />
+        <Sort />
       </div>
       <div className="content__title-search-wrapper">
         <h2 className="content__title">
