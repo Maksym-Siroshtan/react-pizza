@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
 
-import { setCurrentPage } from "../redux/slices/filtersSlice";
+import { setCategoryId, setCurrentPage } from "../redux/slices/filtersSlice";
 
 import Categories from "../components/Categories";
 import Search from "../components/Search";
@@ -15,6 +15,7 @@ import Pagination from "../components/Pagination/Pagination";
 
 function Home() {
   const dispatch = useDispatch();
+
   const { categoryId, currentPage, sortType } = useSelector(
     (state) => state.filters
   );
@@ -22,6 +23,10 @@ function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+  const onChangeCategoryId = (id) => {
+    dispatch(setCategoryId(id));
+  };
 
   const onPageChange = (page) => {
     dispatch(setCurrentPage(page));
@@ -71,7 +76,10 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
+        <Categories
+          categoryId={categoryId}
+          onChangeCategoryId={onChangeCategoryId}
+        />
         <Sort />
       </div>
       <div className="content__title-search-wrapper">

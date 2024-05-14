@@ -13,8 +13,8 @@ export const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    onChangeCategory: (state, action) => {
-      state.categoryId = action.payload.id;
+    setCategoryId: (state, action) => {
+      state.categoryId = action.payload;
     },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
@@ -25,7 +25,7 @@ export const filtersSlice = createSlice({
   },
 });
 
-export const { onChangeCategory, setCurrentPage, setSortType } =
+export const { setCategoryId, setCurrentPage, setSortType } =
   filtersSlice.actions;
 
 export default filtersSlice.reducer;
