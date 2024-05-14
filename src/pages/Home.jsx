@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
+
+import { setCurrentPage } from "../redux/slices/filtersSlice";
 
 import Categories from "../components/Categories";
 import Search from "../components/Search";
@@ -12,13 +14,18 @@ import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
 
 function Home() {
-  const categoryId = useSelector((state) => state.filters.categoryId);
-  const sortType = useSelector((state) => state.filters.sortType);
+  const dispatch = useDispatch();
+  const { categoryId, currentPage, sortType } = useSelector(
+    (state) => state.filters
+  );
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+
+  const onPageChange = (page) => {
+    dispatch(setCurrentPage(page));
+  };
 
   const fetchItems = async () => {
     try {
@@ -75,7 +82,7 @@ function Home() {
       </div>
       <PizzaBlockList items={items} isLoading={isLoading} />
 
-      <Pagination onPageChange={(number) => setCurrentPage(number)} />
+      <Pagination currentPage={currentPage} onPageChange={onPageChange} />
     </div>
   );
 }
