@@ -1,25 +1,19 @@
 import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setSortType } from "../redux/slices/filtersSlice";
+const listOfSortObj = [
+  { name: "популярністю (DESC)", sortProperty: "rating" },
+  { name: "популярністю (ASC)", sortProperty: "-rating" },
+  { name: "ціною (DESC)", sortProperty: "price" },
+  { name: "ціною (ASC)", sortProperty: "-price" },
+  { name: "назвою (DESC)", sortProperty: "title" },
+  { name: "назвою (ASC)", sortProperty: "-title" },
+];
 
-function Sort() {
-  const value = useSelector((state) => state.filters.sortType);
-  const dispatch = useDispatch();
-
+function Sort({ value, onChangeSort }) {
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
-  const list = [
-    { name: "популярністю (DESC)", sortProperty: "rating" },
-    { name: "популярністю (ASC)", sortProperty: "-rating" },
-    { name: "ціною (DESC)", sortProperty: "price" },
-    { name: "ціною (ASC)", sortProperty: "-price" },
-    { name: "назвою (DESC)", sortProperty: "title" },
-    { name: "назвою (ASC)", sortProperty: "-title" },
-  ];
-
-  const onClickToSort = (obj) => {
-    dispatch(setSortType(obj));
+  const onClickToSort = (sortObj) => {
+    onChangeSort(sortObj);
     setIsOpenPopup(false);
   };
 
@@ -44,15 +38,15 @@ function Sort() {
       {isOpenPopup && (
         <div className="sort__popup">
           <ul>
-            {list.map((obj, idx) => (
+            {listOfSortObj.map((sortObj, idx) => (
               <li
                 key={idx}
-                onClick={() => onClickToSort(obj)}
+                onClick={() => onClickToSort(sortObj)}
                 className={
-                  value.sortProperty === obj.sortProperty ? "active" : ""
+                  value.sortProperty === sortObj.sortProperty ? "active" : ""
                 }
               >
-                {obj.name}
+                {sortObj.name}
               </li>
             ))}
           </ul>

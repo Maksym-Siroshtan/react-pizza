@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
 
-import { setCategoryId, setCurrentPage } from "../redux/slices/filtersSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setSortType,
+} from "../redux/slices/filtersSlice";
 
 import Categories from "../components/Categories";
 import Search from "../components/Search";
@@ -30,6 +34,10 @@ function Home() {
 
   const onPageChange = (page) => {
     dispatch(setCurrentPage(page));
+  };
+
+  const onChangeSort = (sortObj) => {
+    dispatch(setSortType(sortObj));
   };
 
   const fetchItems = async () => {
@@ -80,7 +88,7 @@ function Home() {
           categoryId={categoryId}
           onChangeCategoryId={onChangeCategoryId}
         />
-        <Sort />
+        <Sort value={sortType} onChangeSort={onChangeSort} />
       </div>
       <div className="content__title-search-wrapper">
         <h2 className="content__title">
