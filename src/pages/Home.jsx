@@ -6,6 +6,7 @@ import axios from "axios";
 import {
   setCategoryId,
   setCurrentPage,
+  setSearch,
   setSortType,
 } from "../redux/slices/filtersSlice";
 
@@ -20,13 +21,12 @@ import Pagination from "../components/Pagination/Pagination";
 function Home() {
   const dispatch = useDispatch();
 
-  const { categoryId, currentPage, sortType } = useSelector(
+  const { categoryId, currentPage, search, sortType } = useSelector(
     (state) => state.filters
   );
 
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
 
   const onChangeCategoryId = (id) => {
     dispatch(setCategoryId(id));
@@ -34,6 +34,10 @@ function Home() {
 
   const onPageChange = (page) => {
     dispatch(setCurrentPage(page));
+  };
+
+  const onChangeSearchQuery = (searchQuery) => {
+    dispatch(setSearch(searchQuery));
   };
 
   const onChangeSort = (sortObj) => {
@@ -74,6 +78,7 @@ function Home() {
       console.error(error);
     } finally {
       setIsLoading(false);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -94,7 +99,7 @@ function Home() {
         <h2 className="content__title">
           {search ? `Пошук за запитом: ${search}` : "Всі піци"}
         </h2>
-        <Search search={search} setSearch={setSearch} />
+        <Search search={search} onChangeSearchQuery={onChangeSearchQuery} />
       </div>
       <PizzaBlockList items={items} isLoading={isLoading} />
 
