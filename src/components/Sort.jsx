@@ -1,6 +1,6 @@
 import React from "react";
 
-const listOfSortObj = [
+export const listOfSortObj = [
   { name: "популярністю (DESC)", sortProperty: "rating" },
   { name: "популярністю (ASC)", sortProperty: "-rating" },
   { name: "ціною (DESC)", sortProperty: "price" },

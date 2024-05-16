@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import qs from "qs";
 
 import {
   setCategoryId,
   setCurrentPage,
   setSearch,
   setSortType,
+  setFilters,
 } from "../redux/slices/filtersSlice";
+import { listOfSortObj } from "../components/Sort";
 
 import Categories from "../components/Categories";
 import Search from "../components/Search";
@@ -19,7 +23,10 @@ import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
 
 function Home() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
 
   const { categoryId, currentPage, search, sortType } = useSelector(
     (state) => state.filters
@@ -78,12 +85,48 @@ function Home() {
       console.error(error);
     } finally {
       setIsLoading(false);
-      window.scrollTo(0, 0);
     }
   };
 
   useEffect(() => {
-    fetchItems();
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        categoryId,
+        currentPage,
+        sortType: sortType.sortProperty,
+      });
+
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const searchParams = window.location.search.substring(1);
+      const parsedSearchParams = qs.parse(searchParams);
+
+      const sortTypeObj = listOfSortObj.find(
+        (sortObj) => sortObj.sortProperty === parsedSearchParams.sortType
+      );
+
+      dispatch(
+        setFilters({
+          ...parsedSearchParams,
+          sortType: sortTypeObj,
+        })
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!isSearch.current) {
+      fetchItems();
+    }
+    isSearch.current = false;
   }, [categoryId, sortType, search, currentPage]);
 
   return (
