@@ -12,13 +12,28 @@ export const listOfSortObj = [
 function Sort({ value, onChangeSort }) {
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
+  const sortRef = React.useRef(null);
+
   const onClickToSort = (sortObj) => {
     onChangeSort(sortObj);
     setIsOpenPopup(false);
   };
 
+  React.useEffect(() => {
+    const onClickPopupClosingHandler = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setIsOpenPopup(false);
+      }
+    };
+    document.body.addEventListener("click", onClickPopupClosingHandler);
+
+    return () => {
+      document.body.removeEventListener("click", onClickPopupClosingHandler);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
