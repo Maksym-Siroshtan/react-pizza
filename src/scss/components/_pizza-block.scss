@@ -1,11 +1,16 @@
 @import "../variables";
 
 .pizza-block {
-  width: 280px;
+  width: 300px;
   text-align: center;
   border: 1px solid $gray-line;
   border-radius: 30px;
   overflow: hidden;
+
+  @media (max-width: 400px) {
+    width: 280px;
+  }
+
   &:hover {
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }

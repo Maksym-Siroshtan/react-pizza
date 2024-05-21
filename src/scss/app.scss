@@ -77,10 +77,14 @@ body {
 
   &__items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 35px;
     justify-items: center;
     margin-bottom: 40px;
+
+    @media (max-width: 400px) {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
   }
 
   &__top {
@@ -118,6 +122,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
   }
 
   .content__title {
@@ -175,6 +180,7 @@ body {
     border-top: 1px solid $gray-line;
     padding-top: 30px;
     margin-top: 30px;
+    align-items: start;
 
     &-img {
       display: flex;
@@ -192,7 +198,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 40%;
+      flex: 1;
 
       h3 {
         font-weight: bold;
@@ -211,7 +217,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 13%;
+      width: 16%;
 
       &-minus {
         svg {
@@ -230,7 +236,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 33%;
+      width: 20%;
 
       b {
         font-weight: bold;
@@ -299,7 +305,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 210px;
+        width: 220px;
 
         border-color: darken($color: $gray-line, $amount: 10);
 
