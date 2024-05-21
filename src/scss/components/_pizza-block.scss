@@ -1,13 +1,14 @@
 @import "../variables";
 
 .pizza-block {
-  width: 300px;
+  width: 320px;
   text-align: center;
+  padding: 10px;
   border: 1px solid $gray-line;
   border-radius: 30px;
   overflow: hidden;
 
-  @media (max-width: 400px) {
+  @media (max-width: 485px) {
     width: 280px;
   }
 
@@ -16,7 +17,11 @@
   }
 
   &__image {
-    width: 260px;
+    width: 280px;
+
+    @media (max-width: 485px) {
+      width: 220px;
+    }
   }
 
   &__description {
