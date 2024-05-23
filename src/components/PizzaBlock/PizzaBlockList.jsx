@@ -1,14 +1,12 @@
 import PizzaSkeleton from "./PizzaSkeleton";
 import PizzaBlock from "./PizzaBlock";
 
-function PizzaBlockList({ items, isLoading }) {
+function PizzaBlockList({ items, status }) {
   return (
     <ul className="content__items">
-      {isLoading
+      {status === "loading"
         ? [...new Array(10)].map((_, idx) => <PizzaSkeleton key={idx} />)
-        : items.map((item) => (
-            <PizzaBlock isLoading={isLoading} key={item.id} {...item} />
-          ))}
+        : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
     </ul>
   );
 }
