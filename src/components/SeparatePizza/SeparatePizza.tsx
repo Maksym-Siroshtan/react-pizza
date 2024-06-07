@@ -4,10 +4,14 @@ import axios from "axios";
 
 import styles from "./SeparatePizza.module.scss";
 
-function SeparatePizza() {
+const SeparatePizza: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [pizza, setPizza] = React.useState();
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
 
   React.useEffect(() => {
     (async () => {
@@ -48,6 +52,6 @@ function SeparatePizza() {
       </div>
     </div>
   );
-}
+};
 
 export default SeparatePizza;
