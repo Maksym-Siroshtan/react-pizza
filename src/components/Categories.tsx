@@ -1,4 +1,11 @@
-const categories = [
+import React from "react";
+
+type CategotiesProps = {
+  categoryId: number;
+  onChangeCategoryId: any;
+};
+
+const categories: string[] = [
   "Всі",
   "М'ясні",
   "Вегетаріанські",
@@ -7,7 +14,10 @@ const categories = [
   "Закриті",
 ];
 
-function Categories({ categoryId, onChangeCategoryId }) {
+const Categories: React.FC<CategotiesProps> = ({
+  categoryId,
+  onChangeCategoryId,
+}) => {
   return (
     <div className="categories">
       <ul>
@@ -25,6 +35,6 @@ function Categories({ categoryId, onChangeCategoryId }) {
       </ul>
     </div>
   );
-}
+};
 
 export default Categories;

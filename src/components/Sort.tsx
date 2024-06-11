@@ -1,6 +1,12 @@
 import React from "react";
 
-export const listOfSortObj = [
+type SortProps = { value: any; onChangeSort: any };
+type ItemOfSort = {
+  name: string;
+  sortProperty: string;
+};
+
+export const listOfSortObj: ItemOfSort[] = [
   { name: "популярністю (DESC)", sortProperty: "rating" },
   { name: "популярністю (ASC)", sortProperty: "-rating" },
   { name: "ціною (DESC)", sortProperty: "price" },
@@ -9,18 +15,18 @@ export const listOfSortObj = [
   { name: "назвою (ASC)", sortProperty: "-title" },
 ];
 
-function Sort({ value, onChangeSort }) {
+const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
-  const sortRef = React.useRef(null);
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const onClickToSort = (sortObj) => {
+  const onClickToSort = (sortObj: ItemOfSort) => {
     onChangeSort(sortObj);
     setIsOpenPopup(false);
   };
 
   React.useEffect(() => {
-    const onClickPopupClosingHandler = (event) => {
+    const onClickPopupClosingHandler = (event: any) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setIsOpenPopup(false);
       }
@@ -69,6 +75,6 @@ function Sort({ value, onChangeSort }) {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

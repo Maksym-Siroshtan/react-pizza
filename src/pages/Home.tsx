@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +22,16 @@ import Sort from "../components/Sort";
 import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
 
-function Home() {
+type PizzaParams = {
+  page: number;
+  limit: number;
+  sortBy: string;
+  order: string;
+  category?: string;
+  search?: string;
+};
+
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
@@ -32,19 +42,19 @@ function Home() {
     (state) => state.filters
   );
 
-  const onChangeCategoryId = (id) => {
+  const onChangeCategoryId = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
-  const onPageChange = (page) => {
+  const onPageChange = (page: number) => {
     dispatch(setCurrentPage(page));
   };
 
-  const onChangeSearchQuery = (searchQuery) => {
+  const onChangeSearchQuery = (searchQuery: string) => {
     dispatch(setSearch(searchQuery));
   };
 
-  const onChangeSort = (sortObj) => {
+  const onChangeSort = (sortObj: any) => {
     dispatch(setSortType(sortObj));
   };
 
@@ -53,7 +63,7 @@ function Home() {
     const order = sortType.sortProperty.includes("-") ? "ask" : "desc";
     const category = categoryId > 0 ? `${categoryId}` : "";
 
-    const params = {
+    const params: PizzaParams = {
       page: currentPage,
       limit: 4,
       sortBy,
@@ -129,7 +139,7 @@ function Home() {
         <h2 className="content__title">
           {search ? `Пошук за запитом: ${search}` : "Всі піци"}
         </h2>
-        <Search search={search} onChangeSearchQuery={onChangeSearchQuery} />
+        <Search onChangeSearchQuery={onChangeSearchQuery} />
       </div>
       {status === "error" ? (
         <div className="content__error-info">
@@ -145,6 +155,6 @@ function Home() {
       <Pagination currentPage={currentPage} onPageChange={onPageChange} />
     </div>
   );
-}
+};
 
 export default Home;

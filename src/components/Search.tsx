@@ -4,18 +4,22 @@ import debounce from "lodash.debounce";
 import searchLogo from "../assets/img/search.svg";
 import clear from "../assets/img/close.svg";
 
-function Search({ onChangeSearchQuery }) {
+type SearchProps = {
+  onChangeSearchQuery: any;
+};
+
+const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
   const [value, setValue] = React.useState("");
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const updateSearchValue = React.useCallback(
-    debounce((str) => {
+    debounce((str: string) => {
       onChangeSearchQuery(str);
     }, 300),
     []
   );
 
-  const onChangeSearchInput = (event) => {
+  const onChangeSearchInput = (event: any) => {
     const targetValue = event.target.value;
 
     setValue(targetValue);
@@ -25,7 +29,7 @@ function Search({ onChangeSearchQuery }) {
   const onClickClear = () => {
     setValue("");
     onChangeSearchQuery("");
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   return (
@@ -41,6 +45,6 @@ function Search({ onChangeSearchQuery }) {
       <img onClick={onClickClear} src={clear} alt="Clear" className="clear" />
     </div>
   );
-}
+};
 
 export default Search;

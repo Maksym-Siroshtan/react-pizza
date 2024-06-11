@@ -1,8 +1,9 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./NotFoundBlock.module.scss";
 
-function NotFoundBlock() {
+const NotFoundBlock: React.FC = () => {
   return (
     <div className={styles.root}>
       <h1>
@@ -21,6 +22,6 @@ function NotFoundBlock() {
       </Link>
     </div>
   );
-}
+};
 
 export default NotFoundBlock;
