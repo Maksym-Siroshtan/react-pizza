@@ -2,7 +2,7 @@ import React from "react";
 
 type CategotiesProps = {
   categoryId: number;
-  onChangeCategoryId: any;
+  onChangeCategoryId: (id: number) => void;
 };
 
 const categories: string[] = [

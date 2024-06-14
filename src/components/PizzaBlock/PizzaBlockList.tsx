@@ -10,7 +10,7 @@ const PizzaBlockList: React.FC<PizzaListProps> = ({ items, status }) => {
     <ul className="content__items">
       {status === "loading"
         ? [...new Array(10)].map((_, idx) => <PizzaSkeleton key={idx} />)
-        : items.map((item) => <PizzaBlock key={item.id} {...item} />)}
+        : items.map((item: any) => <PizzaBlock key={item.id} {...item} />)}
     </ul>
   );
 };

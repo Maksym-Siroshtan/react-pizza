@@ -13,14 +13,16 @@ import {
   setFilters,
 } from "../redux/slices/filtersSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
-import { listOfSortObj } from "../components/Sort";
 
+import { listOfSortObj } from "../components/Sort";
 import Categories from "../components/Categories";
 import Search from "../components/Search";
 import Sort from "../components/Sort";
 
 import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
+
+import { SortObjItem } from "../@types/SortObjType";
 
 type PizzaParams = {
   page: number;
@@ -54,7 +56,7 @@ const Home: React.FC = () => {
     dispatch(setSearch(searchQuery));
   };
 
-  const onChangeSort = (sortObj: any) => {
+  const onChangeSort = (sortObj: SortObjItem) => {
     dispatch(setSortType(sortObj));
   };
 

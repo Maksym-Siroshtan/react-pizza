@@ -5,7 +5,7 @@ import searchLogo from "../assets/img/search.svg";
 import clear from "../assets/img/close.svg";
 
 type SearchProps = {
-  onChangeSearchQuery: any;
+  onChangeSearchQuery: (searchQuery: string) => void;
 };
 
 const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
@@ -19,7 +19,7 @@ const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
     []
   );
 
-  const onChangeSearchInput = (event: any) => {
+  const onChangeSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const targetValue = event.target.value;
 
     setValue(targetValue);
