@@ -11,6 +11,7 @@ import {
   setSearch,
   setSortType,
   setFilters,
+  SortType,
 } from "../redux/slices/filtersSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
 
@@ -22,11 +23,11 @@ import Sort from "../components/Sort";
 import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
 import Pagination from "../components/Pagination/Pagination";
 
-import { SortObjItem } from "../@types/SortObjType";
+import { AppDispatch, RootState } from "../redux/store";
 
 type PizzaParams = {
-  page: number;
-  limit: number;
+  page: string;
+  limit: string;
   sortBy: string;
   order: string;
   category?: string;
@@ -35,13 +36,13 @@ type PizzaParams = {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { items, status } = useSelector((state) => state.pizzas);
+  const { items, status } = useSelector((state: RootState) => state.pizzas);
   const { categoryId, currentPage, search, sortType } = useSelector(
-    (state) => state.filters
+    (state: RootState) => state.filters
   );
 
   const onChangeCategoryId = (id: number) => {
@@ -56,7 +57,7 @@ const Home: React.FC = () => {
     dispatch(setSearch(searchQuery));
   };
 
-  const onChangeSort = (sortObj: SortObjItem) => {
+  const onChangeSort = (sortObj: SortType) => {
     dispatch(setSortType(sortObj));
   };
 
@@ -66,8 +67,8 @@ const Home: React.FC = () => {
     const category = categoryId > 0 ? `${categoryId}` : "";
 
     const params: PizzaParams = {
-      page: currentPage,
-      limit: 4,
+      page: String(currentPage),
+      limit: String(4),
       sortBy,
       order,
     };
@@ -83,7 +84,7 @@ const Home: React.FC = () => {
     dispatch(
       fetchPizzas({
         params,
-      })
+      } as {})
     );
   };
 

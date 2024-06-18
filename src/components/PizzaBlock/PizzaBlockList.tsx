@@ -2,10 +2,9 @@ import React from "react";
 
 import PizzaSkeleton from "./PizzaSkeleton";
 import PizzaBlock from "./PizzaBlock";
+import { PizzasSliceState } from "../../redux/slices/pizzasSlice";
 
-type PizzaListProps = { items: any; status: any };
-
-const PizzaBlockList: React.FC<PizzaListProps> = ({ items, status }) => {
+const PizzaBlockList: React.FC<PizzasSliceState> = ({ items, status }) => {
   return (
     <ul className="content__items">
       {status === "loading"

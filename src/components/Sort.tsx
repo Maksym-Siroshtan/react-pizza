@@ -1,19 +1,18 @@
 import React from "react";
-
-import { SortObjItem } from "../@types/SortObjType";
+import { SortProperty, SortType } from "../redux/slices/filtersSlice";
 
 type SortProps = {
-  value: SortObjItem;
-  onChangeSort: (obj: SortObjItem) => void;
+  value: SortType;
+  onChangeSort: (obj: SortType) => void;
 };
 
-export const listOfSortObj: SortObjItem[] = [
-  { name: "популярністю (DESC)", sortProperty: "rating" },
-  { name: "популярністю (ASC)", sortProperty: "-rating" },
-  { name: "ціною (DESC)", sortProperty: "price" },
-  { name: "ціною (ASC)", sortProperty: "-price" },
-  { name: "назвою (DESC)", sortProperty: "title" },
-  { name: "назвою (ASC)", sortProperty: "-title" },
+export const listOfSortObj: SortType[] = [
+  { name: "популярністю (DESC)", sortProperty: SortProperty.RATING_DESC },
+  { name: "популярністю (ASC)", sortProperty: SortProperty.RATING_ASC },
+  { name: "ціною (DESC)", sortProperty: SortProperty.PRICE_DESC },
+  { name: "ціною (ASC)", sortProperty: SortProperty.PRICE_ASC },
+  { name: "назвою (DESC)", sortProperty: SortProperty.TITLE_DESC },
+  { name: "назвою (ASC)", sortProperty: SortProperty.TITLE_ASC },
 ];
 
 const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
@@ -21,7 +20,7 @@ const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
 
   const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const onClickToSort = (sortObj: SortObjItem) => {
+  const onClickToSort = (sortObj: SortType) => {
     onChangeSort(sortObj);
     setIsOpenPopup(false);
   };

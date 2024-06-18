@@ -43,6 +43,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
         price,
         type: pizzaTypes[activePizzaTypeIndex],
         size: sizes[activePizzaSizeIndex],
+        count: 0,
       })
     );
   };
