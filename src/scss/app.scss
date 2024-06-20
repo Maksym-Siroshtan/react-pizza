@@ -297,6 +297,21 @@ body {
             display: none;
           }
         }
+
+        &:disabled {
+          border-color: #787878;
+          opacity: 0.4;
+          cursor: not-allowed;
+          transform: none;
+
+          svg path {
+            fill: #787878;
+          }
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
       }
 
       b {
