@@ -15,7 +15,7 @@ export const listOfSortObj: SortType[] = [
   { name: "назвою (ASC)", sortProperty: SortProperty.TITLE_ASC },
 ];
 
-const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
+const Sort: React.FC<SortProps> = React.memo(({ value, onChangeSort }) => {
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -75,6 +75,6 @@ const Sort: React.FC<SortProps> = ({ value, onChangeSort }) => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;

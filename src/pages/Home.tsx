@@ -45,9 +45,9 @@ const Home: React.FC = () => {
     (state: RootState) => state.filters
   );
 
-  const onChangeCategoryId = (id: number) => {
+  const onChangeCategoryId = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onPageChange = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -57,9 +57,9 @@ const Home: React.FC = () => {
     dispatch(setSearch(searchQuery));
   };
 
-  const onChangeSort = (sortObj: SortType) => {
+  const onChangeSort = React.useCallback((sortObj: SortType) => {
     dispatch(setSortType(sortObj));
-  };
+  }, []);
 
   const getPizzas = () => {
     const sortBy = sortType.sortProperty.replace("-", "");
