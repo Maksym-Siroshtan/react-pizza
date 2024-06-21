@@ -2,7 +2,7 @@ import React from "react";
 
 import PizzaSkeleton from "./PizzaSkeleton";
 import PizzaBlock from "./PizzaBlock";
-import { PizzasSliceState } from "../../redux/slices/pizzasSlice";
+import { PizzasSliceState } from "../../redux/pizzas/types";
 
 const PizzaBlockList: React.FC<PizzasSliceState> = ({ items, status }) => {
   return (

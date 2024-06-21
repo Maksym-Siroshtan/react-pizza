@@ -11,9 +11,9 @@ import {
   setSearch,
   setSortType,
   setFilters,
-  SortType,
-} from "../redux/slices/filtersSlice";
-import { fetchPizzas } from "../redux/slices/pizzasSlice";
+} from "../redux/filters/slice";
+import { SortType } from "../redux/filters/types";
+import { fetchPizzas } from "../redux/pizzas/fetchPizzasAsync";
 
 import { listOfSortObj } from "../components/Sort";
 import Categories from "../components/Categories";
