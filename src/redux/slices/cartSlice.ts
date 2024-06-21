@@ -1,5 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { findItemById } from "../../utils/findItemById";
+import { getCartFromLS } from "../../utils/getCartFromLS";
+import { calculateCartValues } from "../../utils/calculateCartValues";
 
 export type CartItemType = {
   id: string;
@@ -11,46 +14,20 @@ export type CartItemType = {
   count: number;
 };
 
-interface CartSliceState {
+export interface CartSliceState {
   items: CartItemType[];
   totalPrice: number;
   totalCount: number;
 }
 
-const initialState: CartSliceState = {
-  items: [],
-  totalPrice: 0,
-  totalCount: 0,
-};
-
-const findAddedItemById = (items: CartItemType[], id: string) =>
-  items.find((item) => item.id === id);
-
-const recalculateTotalPrice = (state: CartSliceState) => {
-  state.totalPrice = state.items.reduce(
-    (sum, item) => item.price * item.count + sum,
-    0
-  );
-};
-
-const recalculateTotalCount = (state: CartSliceState) => {
-  state.totalCount = state.items.reduce(
-    (length, item) => item.count + length,
-    0
-  );
-};
-
-const recalculateTotalValues = (state: CartSliceState) => {
-  recalculateTotalPrice(state);
-  recalculateTotalCount(state);
-};
+const initialState: CartSliceState = getCartFromLS();
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<CartItemType>) => {
-      const isAddedItem = findAddedItemById(state.items, action.payload.id);
+      const isAddedItem = findItemById(state.items, action.payload.id);
 
       if (isAddedItem) {
         isAddedItem.count++;
@@ -61,21 +38,21 @@ export const cartSlice = createSlice({
         });
       }
 
-      recalculateTotalValues(state);
+      calculateCartValues(state);
     },
     minusItem(state, action: PayloadAction<string>) {
-      const isAddedItem = findAddedItemById(state.items, action.payload);
+      const isAddedItem = findItemById(state.items, action.payload);
 
       if (isAddedItem) {
         isAddedItem.count--;
       }
 
-      recalculateTotalValues(state);
+      calculateCartValues(state);
     },
     removeItem(state, action: PayloadAction<string>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
 
-      recalculateTotalValues(state);
+      calculateCartValues(state);
     },
     clearItems(state) {
       state.items = [];
