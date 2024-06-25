@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
-import styles from "./SeparatePizza.module.scss";
+import styles from "./FullPizza.module.scss";
 
 const SeparatePizza: React.FC = () => {
   const navigate = useNavigate();
