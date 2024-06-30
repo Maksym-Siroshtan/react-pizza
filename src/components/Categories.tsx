@@ -14,7 +14,7 @@ const categories: string[] = [
   "Закриті",
 ];
 
-const Categories: React.FC<CategotiesProps> = React.memo(
+export const Categories: React.FC<CategotiesProps> = React.memo(
   ({ categoryId, onChangeCategoryId }) => {
     return (
       <div className="categories">
@@ -35,5 +35,3 @@ const Categories: React.FC<CategotiesProps> = React.memo(
     );
   }
 );
-
-export default Categories;

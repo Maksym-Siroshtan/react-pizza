@@ -16,12 +16,14 @@ import { SortType } from "../redux/filters/types";
 import { fetchPizzas } from "../redux/pizzas/fetchPizzasAsync";
 
 import { listOfSortObj } from "../components/Sort";
-import Categories from "../components/Categories";
-import Search from "../components/Search";
-import Sort from "../components/Sort";
 
-import PizzaBlockList from "../components/PizzaBlock/PizzaBlockList";
-import Pagination from "../components/Pagination/Pagination";
+import {
+  Categories,
+  Search,
+  Sort,
+  PizzaBlockList,
+  Pagination,
+} from "../components";
 
 import { AppDispatch, RootState } from "../redux/store";
 

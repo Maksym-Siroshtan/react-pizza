@@ -8,7 +8,7 @@ type SearchProps = {
   onChangeSearchQuery: (searchQuery: string) => void;
 };
 
-const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
+export const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -46,5 +46,3 @@ const Search: React.FC<SearchProps> = ({ onChangeSearchQuery }) => {
     </div>
   );
 };
-
-export default Search;

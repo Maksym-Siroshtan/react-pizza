@@ -1,10 +1,13 @@
 import React from "react";
 
-import PizzaSkeleton from "./PizzaSkeleton";
-import PizzaBlock from "./PizzaBlock";
+import { PizzaSkeleton } from "./PizzaSkeleton";
+import { PizzaBlock } from "./PizzaBlock";
 import { PizzasSliceState } from "../../redux/pizzas/types";
 
-const PizzaBlockList: React.FC<PizzasSliceState> = ({ items, status }) => {
+export const PizzaBlockList: React.FC<PizzasSliceState> = ({
+  items,
+  status,
+}) => {
   return (
     <ul className="content__items">
       {status === "loading"
@@ -13,5 +16,3 @@ const PizzaBlockList: React.FC<PizzasSliceState> = ({ items, status }) => {
     </ul>
   );
 };
-
-export default PizzaBlockList;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../redux/cart/slice";
 import { CartItemType } from "../redux/cart/types";
 
-const CartItem: React.FC<CartItemType> = ({
+export const CartItem: React.FC<CartItemType> = ({
   id,
   imageUrl,
   title,
@@ -116,5 +116,3 @@ const CartItem: React.FC<CartItemType> = ({
     </li>
   );
 };
-
-export default CartItem;

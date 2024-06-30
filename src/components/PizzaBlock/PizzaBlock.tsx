@@ -17,7 +17,7 @@ type PizzaBlockProps = {
 
 const pizzaTypes = ["тонке", "традиційне"];
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
   id,
   imageUrl,
   title,
@@ -108,5 +108,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     </li>
   );
 };
-
-export default PizzaBlock;
