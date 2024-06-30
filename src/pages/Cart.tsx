@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import { clearItems } from "../redux/cart/slice";
 import { cartSelector } from "../redux/cart/selectors";
@@ -10,6 +11,7 @@ import { CartEmpty, CartItem } from "../components";
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice, totalCount } = useSelector(cartSelector);
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   const onClickClear = () => {
     if (window.confirm("Ви дійсно бажаєте очистити кошик? ")) {
@@ -102,7 +104,7 @@ const Cart: React.FC = () => {
             <span>Очистити кошик</span>
           </div>
         </div>
-        <ul className="content__items cart__items">
+        <ul ref={parent} className="content__items cart__items">
           {items.map((item) => (
             <CartItem key={item.id} {...item} />
           ))}
